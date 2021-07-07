@@ -1,5 +1,22 @@
-const url =
-  "https://newsapi.org/v2/top-headlines?country=us&apiKey=e80cb128944d4bd683a8cd4b5d675d74";
+function produceDefaultUrl() {
+  let url = `https://newsapi.org/v2/top-headlines?apiKey=e80cb128944d4bd683a8cd4b5d675d74`;
+
+  // Look at all url query parameters and add them to the url above to respect language/country/category/page/etc.
+  const urlParams = window.location.search.split("?")[1];
+  console.log("here", window);
+  // console.log("here", urlParams);
+  // Guard against no url params and default to english.
+  if (!urlParams) return url + "&language=en";
+
+  urlParams.split("&").map((p) => {
+    // "Massage data" into workable form.
+    const [key, value] = p.split("=");
+    url += `&${key}=${value}`;
+  });
+
+  return url;
+}
+let url = produceDefaultUrl();
 
 async function getArticles() {
   const response = await fetch(url);

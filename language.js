@@ -6,5 +6,4 @@ function renderLanguageAnchorTags() {
   );
   document.getElementById("language").innerHTML = languageHTML;
 }
-
 renderLanguageAnchorTags();
